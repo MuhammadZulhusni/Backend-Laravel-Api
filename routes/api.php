@@ -51,7 +51,7 @@ Route::get('/services', [ServiceController::class, 'ServiceView']);
 // Get 3 projects for home page
 Route::get('/projecthome', [ProjectController::class, 'onSelectThree']);
 // Get all projects
-Route::get('/projecteall', [ProjectController::class, 'onSelectAll']);
+Route::get('/projectall', [ProjectController::class, 'onSelectAll']);
 // Get details of a specific project
 Route::post('/projectdetails', [ProjectController::class, 'ProjectDetails']);
 
