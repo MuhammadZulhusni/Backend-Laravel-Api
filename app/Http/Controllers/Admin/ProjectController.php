@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; // Still needed if you use Request for other things, but not for ID here
 use App\Models\Project;
 
 class ProjectController extends Controller
@@ -20,10 +20,18 @@ class ProjectController extends Controller
         return $result;
     }
 
-    public function ProjectDetails(Request $request)
+    // IMPORTANT: Change this method to accept the ID directly as a parameter
+    // This $id parameter will automatically be populated from the {id} in your route (e.g., /projectdetails/{id})
+    public function ProjectDetails($id) // Removed Request $request, added $id
     {
-        $id = $request->input('id');
-        $result = Project::where('id', $id)->get();
-        return $result;
+        // Now, $id is directly available from the URL segment
+        $result = Project::where('id', $id)->get(); // Use the $id directly
+
+        // Optional: Add a check for not found
+        if ($result->isEmpty()) {
+            return response()->json(['message' => 'Project not found'], 404);
+        }
+
+        return $result; // Laravel will automatically convert this Collection to JSON
     }
 }
