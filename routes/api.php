@@ -33,7 +33,7 @@ Route::get('/coursehome', [CoursesController::class, 'onSelectFour']);
 // Get all courses
 Route::get('/courseall', [CoursesController::class, 'onSelectAll']);
 // Get details of a specific course
-Route::post('/coursedetails', [CoursesController::class, 'onSelectDetails']);
+Route::get('/coursedetails/{id}', [CoursesController::class, 'onSelectDetails']);
 
 // Footer Section
 // Get footer information
@@ -53,7 +53,8 @@ Route::get('/projecthome', [ProjectController::class, 'onSelectThree']);
 // Get all projects
 Route::get('/projectall', [ProjectController::class, 'onSelectAll']);
 // Get details of a specific project
-Route::post('/projectdetails', [ProjectController::class, 'ProjectDetails']);
+// NEW (Correct for fetching details by ID)
+Route::get('/projectdetails/{id}', [ProjectController::class, 'ProjectDetails']);
 
 // Home Page Section 
 // Get home page video section data

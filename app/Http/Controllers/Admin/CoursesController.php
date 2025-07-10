@@ -18,9 +18,8 @@ class CoursesController extends Controller
         $result = Courses::all();
         return $result;
     }
-    public function onSelectDetails(Request $request)
+    public function onSelectDetails(Request $request, $id) // Accept $id directly as a parameter
     {
-        $id = $request->input('id');
         $result = Courses::where('id', $id)->get();
         return $result;
     }
