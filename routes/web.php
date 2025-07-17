@@ -30,4 +30,9 @@ Route::prefix('admin')->group(function(){
     Route::get('/user/profile/edit',[AdminUserController::class, 'UserProfileEdit'])->name('user.profile.edit');
     // Route to store updated user profile data
     Route::post('/user/profile/store',[AdminUserController::class, 'UserProfileStore'])->name('user.profile.store');
+    // Route to display change passsword form
+    Route::get('/change/password',[AdminUserController::class, 'UserChangePassword'])->name('change.password');
+    // Route to change/update new password
+    Route::post('/change/password/update',[AdminUserController::class, 'UserPasswordUpdate'])->name('change.password.update');
 });
+
