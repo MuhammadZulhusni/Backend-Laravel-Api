@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route; 
 use App\Http\Controllers\AdminUserController; 
+use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\InformationController;
 
@@ -54,7 +55,6 @@ Route::prefix('information')->group(function(){
     Route::get('/delete/{id}',[InformationController::class, 'DeleteInformation'])->name('delete.information');
 });
 
-
 // Groups all routes related to 'service' under the '/service' URL prefix.
 Route::prefix('service')->group(function(){
     // Display all services
@@ -69,4 +69,20 @@ Route::prefix('service')->group(function(){
     Route::post('/update',[ServiceController::class, 'UpdateService'])->name('service.update');
     // Delete a service from the database
     Route::get('/delete/{id}',[ServiceController::class, 'DeleteService'])->name('delete.service');
+});
+
+// Groups all routes related to 'project' under the '/project' URL prefix.
+Route::prefix('project')->group(function(){
+    // Display all projects
+    Route::get('/all',[ProjectController::class, 'AllProject'])->name('all.projects');
+    // Show form to add a new project
+    Route::get('/add',[ProjectController::class, 'AddProject'])->name('add.projects');
+    // Store a new project in the database
+    Route::post('/store',[ProjectController::class, 'StoreProject'])->name('project.store');
+    // Show form to edit an existing project
+    Route::get('/edit/{id}',[ProjectController::class, 'EditProject'])->name('edit.project');
+    // Update an existing project in the database
+    Route::post('/update/',[ProjectController::class, 'UpdateProject'])->name('project.update');
+    // Delete a project from the database
+    Route::get('/delete/{id}',[ProjectController::class, 'DeleteProject'])->name('delete.project'); 
 });
