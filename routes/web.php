@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route; 
 use App\Http\Controllers\AdminUserController; 
+use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\InformationController;
 
 Route::get('/', function () {
@@ -37,7 +38,6 @@ Route::prefix('admin')->group(function(){
     Route::post('/change/password/update',[AdminUserController::class, 'UserPasswordUpdate'])->name('change.password.update');
 });
 
-
 // Groups all routes related to 'information' under the '/information' URL prefix.
 Route::prefix('information')->group(function(){
     // Route to display all information records.
@@ -52,4 +52,21 @@ Route::prefix('information')->group(function(){
     Route::post('/update/{id}',[InformationController::class, 'UpdateInformation'])->name('information.update');
     // Route to delete a specific information record, identified by its ID.
     Route::get('/delete/{id}',[InformationController::class, 'DeleteInformation'])->name('delete.information');
+});
+
+
+// Groups all routes related to 'service' under the '/service' URL prefix.
+Route::prefix('service')->group(function(){
+    // Display all services
+    Route::get('/all',[ServiceController::class, 'AllService'])->name('all.services');
+    // Show form to add a new service
+    Route::get('/add',[ServiceController::class, 'AddService'])->name('add.services');
+    // Store a new service in the database
+    Route::post('/store',[ServiceController::class, 'StoreService'])->name('service.store');
+    // Show form to edit an existing service
+    Route::get('/edit/{id}',[ServiceController::class, 'EditService'])->name('edit.service');
+    // Update an existing service in the database
+    Route::post('/update',[ServiceController::class, 'UpdateService'])->name('service.update');
+    // Delete a service from the database
+    Route::get('/delete/{id}',[ServiceController::class, 'DeleteService'])->name('delete.service');
 });
