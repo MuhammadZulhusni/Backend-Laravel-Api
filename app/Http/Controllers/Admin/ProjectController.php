@@ -4,98 +4,80 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Project; // Imports the Project Eloquent model.
-use Intervention\Image\Facades\Image; // Imports the Intervention Image facade for image manipulation.
+use App\Models\Project; // Project model for database interaction.
+use Intervention\Image\Facades\Image; // Image manipulation library.
 
 class ProjectController extends Controller
 {
     /**
-     * Retrieves the first three projects.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * Get the first three projects.
      */
     public function onSelectThree()
     {
-        $result = Project::limit(3)->get();
-        return $result;
+        return Project::limit(3)->get();
     }
 
     /**
-     * Retrieves all projects.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * Get all projects.
      */
     public function onSelectAll()
     {
-        $result = Project::all();
-        return $result;
+        return Project::all();
     }
 
     /**
-     * Retrieves details for a specific project by its ID.
-     *
-     * @param int $id The ID of the project.
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Database\Eloquent\Collection
+     * Get details for a specific project by ID.
      */
     public function ProjectDetails($id)
     {
         $result = Project::where('id', $id)->get();
-
         if ($result->isEmpty()) {
             return response()->json(['message' => 'Project not found'], 404);
         }
-
         return $result;
     }
 
     /**
-     * Displays a list of all projects in the admin panel.
-     *
-     * @return \Illuminate\View\View
+     * Display all projects in the admin panel.
      */
     public function AllProject(){
         $projects = Project::all();
-        return view('backend.project.all_project',compact('projects'));
+        return view('backend.project.all_project', compact('projects'));
     }
 
     /**
-     * Shows the form for adding a new project.
-     *
-     * @return \Illuminate\View\View
+     * Show form to add a new project.
      */
     public function AddProject(){
        return view('backend.project.add_project');
     }
 
     /**
-     * Stores a newly created project in the database.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * Store a new project with images.
      */
     public function StoreProject(Request $request){
-       $request->validate([ // Validates incoming request data.
+       $request->validate([ // Validate project name, description, and first image.
             'project_name' => 'required',
             'project_description' => 'required',
             'img_one' => 'required',
         ],[
-            'project_name.required' => 'Input Project Name', // Custom error message.
-            'project_description.required' => 'Input Project Description', // Custom error message.
+            'project_name.required' => 'Input Project Name',
+            'project_description.required' => 'Input Project Description',
         ]);
 
-        // Handles upload and resizing for the first image.
+        // Process and save first image.
         $image_one = $request->file('img_one');
-        $name_gen = hexdec(uniqid()).'.'.$image_one->getClientOriginalExtension();
-        Image::make($image_one)->resize(626,417)->save('upload/project/'.$name_gen);
-        $save_url_one = 'http://127.0.0.1:8000/upload/project/'.$name_gen;
+        $name_gen_one = hexdec(uniqid()).'.'.$image_one->getClientOriginalExtension(); // Unique filename.
+        Image::make($image_one)->resize(626,417)->save('upload/project/'.$name_gen_one);
+        $save_url_one = 'http://127.0.0.1:8000/upload/project/'.$name_gen_one;
 
-        // Handles upload and resizing for the second image.
+        // Process and save second image.
         $image_two = $request->file('img_two');
-        $name_gen = hexdec(uniqid()).'.'.$image_two->getClientOriginalExtension();
-        Image::make($image_two)->resize(540,607)->save('upload/project/'.$name_gen);
-        $save_url_two = 'http://127.0.0.1:8000/upload/project/'.$name_gen;
+        $name_gen_two = hexdec(uniqid()).'.'.$image_two->getClientOriginalExtension(); // Unique filename.
+        Image::make($image_two)->resize(540,607)->save('upload/project/'.$name_gen_two);
+        $save_url_two = 'http://127.0.0.1:8000/upload/project/'.$name_gen_two;
 
-        Project::insert([ // Inserts new project record into the database.
+        Project::insert([ // Insert project data into database.
             'project_name' => $request->project_name,
             'project_description' => $request->project_description,
             'project_features' => $request->project_features,
@@ -104,96 +86,84 @@ class ProjectController extends Controller
             'img_two' => $save_url_two,
         ]);
 
-         $notification = array( // Prepares a success notification.
+         $notification = [ // Success notification.
             'message' => 'Project Inserted Successfully',
             'alert-type' => 'success'
-        );
+        ];
 
-        return redirect()->route('all.projects')->with($notification); // Redirects to all projects with notification.
+        return redirect()->route('all.projects')->with($notification);
     }
 
     /**
-     * Shows the form for editing an existing project.
-     *
-     * @param int $id The ID of the project to edit.
-     * @return \Illuminate\View\View
+     * Show form to edit an existing project.
      */
     public function EditProject($id){
-        $project = Project::findOrFail($id); // Finds the project by ID or throws 404.
+        $project = Project::findOrFail($id); // Find project by ID.
         return view('backend.project.edit_project',compact('project'));
     }
 
     /**
-     * Updates an existing project in the database.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * Update an existing project and its images.
      */
     public function UpdateProject(Request $request){
         $project_id = $request->id;
+        $project = Project::findOrFail($project_id); // Get existing project data.
 
-        if ($request->file('img_one')) { // Checks if new images are uploaded.
+        $save_url_one = $project->img_one; // Retain old image URLs by default.
+        $save_url_two = $project->img_two;
 
-            // Handles upload and resizing for the first image.
+        // Handle update for Image One.
+        if ($request->hasFile('img_one')) { // If a new image is uploaded.
+            // Delete old image file if it exists.
+            if ($project->img_one && file_exists(public_path('upload/project/'.basename($project->img_one)))) {
+                unlink(public_path('upload/project/'.basename($project->img_one)));
+            }
             $image_one = $request->file('img_one');
-            $name_gen = hexdec(uniqid()).'.'.$image_one->getClientOriginalExtension();
-            Image::make($image_one)->resize(626,417)->save('upload/project/'.$name_gen);
-            $save_url_one = 'http://127.0.0.1:8000/upload/project/'.$name_gen;
-
-            // Handles upload and resizing for the second image.
-            $image_two = $request->file('img_two');
-            $name_gen = hexdec(uniqid()).'.'.$image_two->getClientOriginalExtension();
-            Image::make($image_two)->resize(540,607)->save('upload/project/'.$name_gen);
-            $save_url_two = 'http://127.0.0.1:8000/upload/project/'.$name_gen;
-
-            Project::findOrFail($project_id)->update([ // Updates project with new images.
-                'project_name' => $request->project_name,
-                'project_description' => $request->project_description,
-                'project_features' => $request->project_features,
-                'live_preview' => $request->live_preview,
-                'img_one' => $save_url_one,
-                'img_two' => $save_url_two,
-            ]);
-
-            $notification = array( // Success notification with image update.
-                'message' => 'Project Updated Successfully',
-                'alert-type' => 'success'
-            );
-
-            return redirect()->route('all.projects')->with($notification);
-
-        }else{ // If no new images are uploaded, update only text fields.
-
-            Project::findOrFail($project_id)->update([
-                'project_name' => $request->project_name,
-                'project_description' => $request->project_description,
-                'project_features' => $request->project_features,
-                'live_preview' => $request->live_preview,
-            ]);
-
-            $notification = array( // Info notification without image update.
-                'message' => 'Project Updated Without Image Successfully',
-                'alert-type' => 'info'
-            );
-
-            return redirect()->route('all.projects')->with($notification);
+            $name_gen_one = hexdec(uniqid()).'.'.$image_one->getClientOriginalExtension();
+            Image::make($image_one)->resize(626,417)->save('upload/project/'.$name_gen_one);
+            $save_url_one = 'http://127.0.0.1:8000/upload/project/'.$name_gen_one;
         }
+
+        // Handle update for Image Two.
+        if ($request->hasFile('img_two')) { // If a new image is uploaded.
+            // Delete old image file if it exists.
+            if ($project->img_two && file_exists(public_path('upload/project/'.basename($project->img_two)))) {
+                unlink(public_path('upload/project/'.basename($project->img_two)));
+            }
+            $image_two = $request->file('img_two');
+            $name_gen_two = hexdec(uniqid()).'.'.$image_two->getClientOriginalExtension();
+            Image::make($image_two)->resize(540,607)->save('upload/project/'.$name_gen_two);
+            $save_url_two = 'http://127.0.0.1:8000/upload/project/'.$name_gen_two;
+        }
+
+        Project::findOrFail($project_id)->update([ // Update project data in database.
+            'project_name' => $request->project_name,
+            'project_description' => $request->project_description,
+            'project_features' => $request->project_features,
+            'live_preview' => $request->live_preview,
+            'img_one' => $save_url_one,
+            'img_two' => $save_url_two,
+        ]);
+
+        $notification = [ // Success notification.
+            'message' => 'Project Updated Successfully',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('all.projects')->with($notification);
     }
 
     /**
-     * Deletes a project from the database.
-     *
-     * @param int $id The ID of the project to delete.
-     * @return \Illuminate\Http\RedirectResponse
+     * Delete a project.
      */
     public function DeleteProject($id){
-        Project::findOrFail($id)->delete(); // Finds and deletes the project.
+        Project::findOrFail($id)->delete(); // Delete project by ID.
 
-        $notification = array( // Success notification for deletion.
+        $notification = [ // Success notification.
             'message' => 'Project Deleted Successfully',
             'alert-type' => 'success'
-        );
+        ];
 
-        return redirect()->back()->with($notification); // Redirects back to the previous page.
+        return redirect()->back()->with($notification);
     }
 }
