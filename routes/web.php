@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route; 
 use App\Http\Controllers\AdminUserController; 
+use App\Http\Controllers\Admin\InformationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,3 +37,19 @@ Route::prefix('admin')->group(function(){
     Route::post('/change/password/update',[AdminUserController::class, 'UserPasswordUpdate'])->name('change.password.update');
 });
 
+
+// Groups all routes related to 'information' under the '/information' URL prefix.
+Route::prefix('information')->group(function(){
+    // Route to display all information records.
+    Route::get('/all',[InformationController::class, 'AllInformation'])->name('all.information');
+    // Route to display the form for adding new information.
+    Route::get('/add',[InformationController::class, 'AddInformation'])->name('add.information');
+    // Route to store new information submitted via a POST request.
+    Route::post('/store',[InformationController::class, 'StoreInformation'])->name('information.store');
+    // Route to display the form for editing a specific information record, identified by its ID.
+    Route::get('/edit/{id}',[InformationController::class, 'EditInformation'])->name('edit.information');
+    // Route to update a specific information record, identified by its ID, via a POST request.
+    Route::post('/update/{id}',[InformationController::class, 'UpdateInformation'])->name('information.update');
+    // Route to delete a specific information record, identified by its ID.
+    Route::get('/delete/{id}',[InformationController::class, 'DeleteInformation'])->name('delete.information');
+});
