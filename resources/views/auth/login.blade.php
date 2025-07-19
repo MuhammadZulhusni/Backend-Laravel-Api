@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>REST-API Dashboard Login</title>
+    <title>REST-API Backend Login</title>
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('backend/images/tab.png') }}">
     <link href="{{ asset('backend/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/css/style.css') }}" rel="stylesheet">
@@ -134,7 +134,6 @@
             max-width: 120px;
             height: auto;
             margin-bottom: 20px;
-            filter: brightness(0) invert(1);
         }
         
         .api-endpoint {

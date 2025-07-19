@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\HomePageEtcController;
 use App\Http\Controllers\Admin\InformationController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 // Routes requiring authentication, Sanctum, Jetstream session, and verification
