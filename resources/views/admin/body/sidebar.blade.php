@@ -101,11 +101,20 @@
                 </ul>
             </li>
 
-            {{-- Widget Link (Single Item) --}}
-            <li>
-                <a href="widget-basic.html" class="ai-icon" aria-expanded="false">
+            {{-- Chart Management Section --}}
+            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <i class="flaticon-053-heart"></i>
+                        <span class="nav-text">Chart Content </span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('all.chart.content') }}">All Chart Content</a></li>          
+                </ul>
+            </li>
+
+            {{-- Contact Management --}}
+            <li><a href="{{ route('contact.message') }}" class="ai-icon" aria-expanded="false">
                     <i class="flaticon-381-settings-2"></i>
-                    <span class="nav-text">Widget</span>
+                    <span class="nav-text">Contact Message</span>
                 </a>
             </li>
         </ul>
