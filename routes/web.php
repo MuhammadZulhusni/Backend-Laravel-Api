@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route; 
 use App\Http\Controllers\AdminUserController; 
+use App\Http\Controllers\Admin\FooterController;
 use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -136,4 +137,14 @@ Route::prefix('review')->group(function(){
     Route::post('/update/',[ClientReviewController::class, 'UpdateReview'])->name('review.update');
     // Route to delete a review, takes review ID.
     Route::get('/delete/{id}',[ClientReviewController::class, 'DeleteReview'])->name('delete.review'); 
+});
+
+// Groups all routes related to 'footer' under the '/footer' URL prefix.
+Route::prefix('footer')->group(function(){
+    // Route to display all footer.
+    Route::get('/all',[FooterController::class, 'AllFooterContent'])->name('all.footer.content');
+    // Route to display the form for editing, takes footer ID.
+    Route::get('/edit/{id}',[FooterController::class, 'EditFooterContent'])->name('edit.footer');
+    // Route to update an existing footer.
+    Route::post('/update/',[FooterController::class, 'UpdateFooterContent'])->name('footer.update');
 });

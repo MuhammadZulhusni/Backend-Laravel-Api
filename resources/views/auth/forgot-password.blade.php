@@ -197,7 +197,7 @@
                     <img src="{{ asset('backend/images/tab.png') }}" alt="API Logo" class="logo-login">
                 </div>
                 
-                <h4 class="text-center">Reset Credentials</h4>
+                <h4 class="text-center">Reset Password</h4>
                 
                 <div class="text-muted text-center">
                     Forgot your password? Enter your registered email and we'll send it to your inbox.
@@ -225,7 +225,7 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="email" class="form-label">REGISTERED_EMAIL</label>
+                        <label for="email" class="form-label">REGISTERED EMAIL</label>
                         <input id="email" class="form-control" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username">
                     </div>
 

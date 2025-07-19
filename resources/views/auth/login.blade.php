@@ -254,7 +254,7 @@
                                 @csrf
 
                                 <div class="form-group">
-                                    <label for="email">EMAIL_ADDRESS</label>
+                                    <label for="email">EMAIL ADDRESS</label>
                                     <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}" required autofocus placeholder="user@example.com">
                                 </div>
 
@@ -271,13 +271,13 @@
                                             Forgot your password?&nbsp;
                                         </span>
                                         @if (Route::has('password.request'))
-                                            <a href="{{ route('password.request') }}" class="text-primary">Reset credentials</a>
+                                            <a href="{{ route('password.request') }}" class="text-primary">Reset Password</a>
                                         @endif
                                     </div>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary btn-block">
-                                    <span class="status-indicator"></span> Authenticate
+                                    <span class="status-indicator"></span> Login
                                 </button>
                             </form>
                         </div>
