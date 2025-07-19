@@ -57,6 +57,16 @@
                 </ul>
             </li>
 
+            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <i class="flaticon-053-heart"></i>
+                    <span class="nav-text">Our Courses</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('all.courses') }}">All Courses</a></li>
+                    <li><a href="{{ route('add.courses') }}">Add Courses </a></li>                      
+                </ul>
+            </li>
+
             {{-- Widget Link --}}
             <li>
                 <a href="widget-basic.html" class="ai-icon" aria-expanded="false">
