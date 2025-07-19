@@ -2,14 +2,16 @@
 
 use Illuminate\Support\Facades\Route; 
 use App\Http\Controllers\AdminUserController; 
+use App\Http\Controllers\Admin\FooterController;
 use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\HomePageEtcController;
 use App\Http\Controllers\Admin\InformationController;
+use App\Http\Controllers\Admin\ClientReviewController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 // Routes requiring authentication, Sanctum, Jetstream session, and verification
@@ -119,4 +121,30 @@ Route::prefix('home')->group(function(){
     Route::post('/update/',[HomePageEtcController::class, 'UpdateHomeContent'])->name('homecontent.update');
     // Route to delete home page content by ID.
     Route::get('/delete/{id}',[HomePageEtcController::class, 'DeleteHomeContent'])->name('delete.homecontent');
+});
+
+// Groups all routes related to 'review' under the '/review' URL prefix.
+Route::prefix('review')->group(function(){
+    // Route to display all reviews.
+    Route::get('/all',[ClientReviewController::class, 'AllReview'])->name('all.review');
+    // Route to display the form for adding a review.
+    Route::get('/add',[ClientReviewController::class, 'AddReview'])->name('add.review');
+    // Route to store a new review.
+    Route::post('/store',[ClientReviewController::class, 'StoreReview'])->name('review.store');
+    // Route to display the form for editing a review, takes review ID.
+    Route::get('/edit/{id}',[ClientReviewController::class, 'EditReview'])->name('edit.review');
+    // Route to update an existing review.
+    Route::post('/update/',[ClientReviewController::class, 'UpdateReview'])->name('review.update');
+    // Route to delete a review, takes review ID.
+    Route::get('/delete/{id}',[ClientReviewController::class, 'DeleteReview'])->name('delete.review'); 
+});
+
+// Groups all routes related to 'footer' under the '/footer' URL prefix.
+Route::prefix('footer')->group(function(){
+    // Route to display all footer.
+    Route::get('/all',[FooterController::class, 'AllFooterContent'])->name('all.footer.content');
+    // Route to display the form for editing, takes footer ID.
+    Route::get('/edit/{id}',[FooterController::class, 'EditFooterContent'])->name('edit.footer');
+    // Route to update an existing footer.
+    Route::post('/update/',[FooterController::class, 'UpdateFooterContent'])->name('footer.update');
 });

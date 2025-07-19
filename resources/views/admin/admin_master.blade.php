@@ -8,7 +8,7 @@
     <title>React - Admin Dashboard</title>
 
     {{-- Favicon --}}
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('backend/images/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('backend/images/tab.png') }}">
 
     {{-- Plugin CSS files --}}
     <link rel="stylesheet" href="{{ asset('backend/vendor/chartist/css/chartist.min.css') }}">

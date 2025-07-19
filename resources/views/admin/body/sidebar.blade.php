@@ -80,6 +80,27 @@
                 </ul>
             </li>
 
+            {{-- Client Review Management Section --}}
+            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <i class="flaticon-053-heart"></i>
+                        <span class="nav-text">Client Review </span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('all.review') }}">All Review</a></li>
+                    <li><a href="{{ route('add.review') }}">Add Review </a></li>    
+                </ul>
+            </li>
+
+            {{-- Footer Management Section --}}
+            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <i class="flaticon-053-heart"></i>
+                            <span class="nav-text">Footer Content </span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('all.footer.content') }}">All Footer Content</a></li>     
+                </ul>
+            </li>
+
             {{-- Widget Link (Single Item) --}}
             <li>
                 <a href="widget-basic.html" class="ai-icon" aria-expanded="false">
@@ -92,7 +113,7 @@
         {{-- Copyright Information Section --}}
         <div class="copyright">
             <p><strong>Easy React Admin Dashboard</strong> © 2021 All Rights Reserved</p> {{-- Copyright text. --}}
-            <p class="fs-12">Made with <span class="heart"></span> by EasyLearningbd</p> {{-- Attribution text. --}}
+            <p class="fs-12">Made with <span class="heart"></span> by Zulhusni</p> {{-- Attribution text. --}}
         </div>
     </div>
 </div>
