@@ -151,12 +151,13 @@ Route::prefix('footer')->group(function(){
     Route::post('/update/',[FooterController::class, 'UpdateFooterContent'])->name('footer.update');
 });
 
- // Chart Content All Routes 
+// Groups all routes related to 'chart' under the '/chart' URL prefix.
 Route::prefix('chart')->group(function(){
     Route::get('/all',[ChartController::class, 'AllChartContent'])->name('all.chart.content');
     Route::get('/edit/{id}',[ChartController::class, 'EditChartContent'])->name('edit.chart');
     Route::post('/update/',[ChartController::class, 'UpdateChartContent'])->name('chart.update');
 });
 
+// Contact Message Routes
 Route::get('/all',[ContactController::class, 'AllContactMessage'])->name('contact.message');
 Route::get('/delete/message/{id}',[ContactController::class, 'DeleteContactMessage'])->name('delete.message'); 

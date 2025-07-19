@@ -1,5 +1,5 @@
 <div class="nav-header">
-    <a href="#" class="brand-logo">
+    <a href="{{ route('dashboard') }}" class="brand-logo">
         {{-- Dashboard logo --}}
         <img src="{{ asset('backend/images/api-backend.png')}}" alt="Dashboard Logo" class="img-fluid">
     </a>

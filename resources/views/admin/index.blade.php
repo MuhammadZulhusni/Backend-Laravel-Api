@@ -5,15 +5,6 @@
 	<div class="container-fluid">
 		<div class="form-head mb-sm-5 mb-3 d-flex flex-wrap align-items-center">
 			<h2 class="font-w600 mb-2 mr-auto ">Dashboard</h2>
-			<div class="weather-btn mb-2">
-				<span class="mr-3 fs-22 font-w600 text-black"><i class="fa fa-cloud mr-2"></i>21</span>
-				<select class="form-control style-1 default-select  mr-3 ">
-					<option>Medan, IDN</option>
-					<option>Jakarta, IDN</option>
-					<option>Surabaya, IDN</option>
-				</select>
-			</div>
-			<a href="javascript:void(0);" class="btn btn-secondary text-white mb-2"><i class="las la-calendar scale5 mr-3"></i>Filter Periode</a>
 		</div>
 		<div class="row">
 			<div class="col-xl-3 col-sm-6 m-t35">
@@ -140,109 +131,6 @@
 							</svg>
 							<span class="text-success mr-1">45%</span>This week
 						</p>	
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xl-9 col-xxl-8">
-				<div class="card">
-					<div class="card-header border-0 flex-wrap pb-0">
-						<div class="mb-3">
-							<h4 class="fs-20 text-black">Market Overview</h4>
-							<p class="mb-0 fs-12 text-black">Lorem ipsum dolor sit amet, consectetur</p>
-						</div>
-						<div class="d-flex flex-wrap mb-2">
-							<div class="custom-control check-switch custom-checkbox mr-4 mb-2">
-								<input type="checkbox" class="custom-control-input" id="customCheck9">
-								<label class="custom-control-label" for="customCheck9">
-									<span class="d-block  font-w500 mt-2">BTC</span>
-								</label>
-							</div>
-							<div class="custom-control check-switch custom-checkbox mr-4 mb-2">
-								<input type="checkbox" class="custom-control-input" id="customCheck91">
-								<label class="custom-control-label" for="customCheck91">
-									<span class="d-block  font-w500 mt-2">XRP</span>
-								</label>
-							</div>
-							<div class="custom-control check-switch custom-checkbox mr-4 mb-2">
-								<input type="checkbox" class="custom-control-input" id="customCheck92">
-								<label class="custom-control-label" for="customCheck92">
-									<span class="d-block font-w500 mt-2">ETH</span>
-								</label>
-							</div>
-							<div class="custom-control check-switch custom-checkbox mr-4 mb-2">
-								<input type="checkbox" class="custom-control-input" id="customCheck93">
-								<label class="custom-control-label" for="customCheck93">
-									<span class="d-block font-w500 mt-2">ZEC</span>
-								</label>
-							</div>
-						</div>
-						<select class="form-control style-1 default-select">
-							<option>Weekly (2021)</option>
-							<option>Daily (2021)</option>
-							<option>Yearly (2021)</option>
-						</select>
-					</div>
-					<div class="card-body pb-0">
-						<div id="marketChart" class="market-line"></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xl-3 col-xxl-4">
-				<div class="card">
-					<div class="card-header border-0 pb-0">
-						<h4 class="fs-20 text-black">Current Statistic</h4>
-					</div>
-					<div class="card-body pb-0">
-						<div id="currentChart" class="current-chart"></div>
-						<div class="chart-content">	
-							<div class="d-flex justify-content-between mb-2 align-items-center">
-								<div>
-									<svg class="mr-2" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<rect width="15" height="15" rx="7.5" fill="#EB8153"/>
-									</svg>
-									<span class="fs-14">Income (66%)</span>
-								</div>
-								<div>
-									<h5 class="mb-0">$167,884.21</h5>
-								</div>
-							</div>
-							<div class="d-flex justify-content-between mb-2 align-items-center">
-								<div>
-									<svg class="mr-2" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<rect width="15" height="15" rx="7.5" fill="#71B945"/>
-									</svg>
-
-									<span class="fs-14">Income (50%)</span>
-								</div>
-								<div>
-									<h5 class="mb-0">$56,411.33</h5>
-								</div>
-							</div>
-							<div class="d-flex justify-content-between mb-2 align-items-center">
-								<div>
-									<svg class="mr-2" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<rect width="15" height="15" rx="7.5" fill="#4A8CDA"/>
-									</svg>
-									<span class="fs-14">Income (11%)</span>
-								</div>
-								<div>
-									<h5 class="mb-0">$81,981.22</h5>
-								</div>
-							</div>
-							<div class="d-flex justify-content-between mb-2 align-items-center">
-								<div>
-									<svg class="mr-2" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<rect width="15" height="15" rx="7.5" fill="#6647BF"/>
-									</svg>
-									<span class="fs-14">Income (23%)</span>
-								</div>
-								<div>
-									<h5 class="mb-0">$12,432.51</h5>
-								</div>
-							</div>
-						</div>	
 					</div>
 				</div>
 			</div>
