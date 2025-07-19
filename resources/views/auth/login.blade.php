@@ -5,79 +5,223 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Admin Dashboard Login</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('backend/images/favicon.png') }}">
+    <title>REST-API Dashboard Login</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('backend/images/tab.png') }}">
     <link href="{{ asset('backend/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/css/style.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5649c2;
+            --secondary: #00cec9;
+            --dark: #1a1a2e;
+            --darker: #16213e;
+            --light: #e2e8f0;
+            --code: #0f172a;
+            --success: #00b894;
+            --error: #ff7675;
+        }
+        
         body {
-            background-color: #f0f2f5;
+            background-color: var(--dark);
+            color: var(--light);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
         }
+        
         .authincation-content {
-            background-color: #ffffff !important; /* Forced white background */
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background-color: var(--darker) !important;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             overflow: hidden;
+            position: relative;
         }
-        /* Set default text color for elements inside the white card to dark */
-        .authincation-content,
+        
+        .authincation-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
         .authincation-content h4,
         .authincation-content label,
         .authincation-content p {
-            color: #333333 !important; /* Dark text color for readability on white */
+            color: var(--light) !important;
+            font-family: 'Inter', sans-serif;
         }
+        
         .authincation-content a.text-primary {
-             color: #6c5ce7 !important;
+            color: var(--secondary) !important;
         }
+        
         .authincation-content p a.text-primary {
-             color: #6c5ce7 !important;
+            color: var(--secondary) !important;
         }
-
+        
         .auth-form {
             padding: 40px;
         }
+        
         .form-control {
-            border-radius: 8px;
+            background-color: var(--code);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
             padding: 12px 15px;
-            border: 1px solid #ddd;
-            color: #333333 !important; /* FORCED black text inside input fields */
+            color: var(--light) !important;
+            font-family: 'Roboto Mono', monospace;
+            transition: all 0.3s ease;
         }
+        
         .form-control:focus {
-            border-color: #6c5ce7;
+            border-color: var(--primary);
             box-shadow: 0 0 0 0.2rem rgba(108, 92, 231, 0.25);
+            background-color: var(--code);
         }
+        
         .btn-primary {
-            background-color: #6c5ce7;
-            border-color: #6c5ce7;
-            border-radius: 8px;
+            background-color: var(--primary);
+            border-color: var(--primary);
+            border-radius: 6px;
             padding: 12px 0;
-            font-weight: 700;
-            transition: background-color 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
         }
+        
         .btn-primary:hover {
-            background-color: #5a4dc2;
-            border-color: #5a4dc2;
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-1px);
         }
+        
         a:hover {
-            text-decoration: underline;
+            text-decoration: none;
+            opacity: 0.8;
         }
+        
         .custom-control-label::before,
         .custom-control-label::after {
-            border-radius: 5px;
+            border-radius: 4px;
+            background-color: var(--code);
+            border-color: rgba(255, 255, 255, 0.2);
         }
+        
         .alert-danger {
-            background-color: #fdd;
-            border-color: #fcc;
-            color: #c00;
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 8px;
+            background-color: rgba(255, 118, 117, 0.2);
+            border-left: 4px solid var(--error);
+            color: var(--light);
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            font-family: 'Roboto Mono', monospace;
         }
+        
+        .alert-danger ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
         .logo-login {
-            max-width: 150px;
+            max-width: 120px;
             height: auto;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            filter: brightness(0) invert(1);
+        }
+        
+        .api-endpoint {
+            display: inline-block;
+            background: rgba(108, 92, 231, 0.1);
+            color: var(--secondary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--light);
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+        
+        .custom-checkbox .custom-control-label::before {
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .custom-control-input:checked~.custom-control-label::before {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.8rem;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 0 10px;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--success);
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .login-header h4 {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .login-header p {
+            color: rgba(255, 255, 255, 0.6) !important;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -89,10 +233,13 @@
                 <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10">
                     <div class="authincation-content card">
                         <div class="card-body auth-form p-sm-5">
-                            <div class="text-center mb-4">
-                                <img src="{{ asset('backend/images/logo.png') }}" alt="Logo" class="logo-login">
+                            <div class="login-header">
+                                <div class="text-center mb-4">
+                                    <img src="{{ asset('backend/images/tab.png') }}" alt="API Logo" class="logo-login">
+                                </div>
+                                <h4 class="mt-3">Dashboard Authentication</h4>
+                                <p>Authenticate to access the admin dashboard</p>
                             </div>
-                            <h4 class="text-center mb-5 font-weight-bold">Sign in to your Account</h4>
 
                             @if ($errors->any())
                                 <div class="alert alert-danger">
@@ -107,40 +254,33 @@
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
 
-                                <div class="form-group mb-4">
-                                    <label class="mb-1"><strong>Email Address</strong></label>
-                                    <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}" required autofocus>
+                                <div class="form-group">
+                                    <label for="email">EMAIL_ADDRESS</label>
+                                    <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}" required autofocus placeholder="user@example.com">
                                 </div>
 
-                                <div class="form-group mb-4">
-                                    <label class="mb-1"><strong>Password</strong></label>
-                                    <input type="password" id="password" name="password" class="form-control" required>
+                                <div class="form-group">
+                                    <label for="password">PASSWORD</label>
+                                    <input type="password" id="password" name="password" class="form-control" required placeholder="••••••••">
                                 </div>
 
-                                <div class="form-row d-flex justify-content-between align-items-center mt-4 mb-4">
-                                    <div class="form-group mb-0">
-                                        <div class="custom-control custom-checkbox ml-1">
-                                            <input type="checkbox" class="custom-control-input" id="remember_me" name="remember">
-                                            <label class="custom-control-label" for="remember_me">Remember me</label>
-                                        </div>
+                                <div class="remember-forgot">
+                                    <div class="custom-control custom-checkbox">
                                     </div>
-                                    <div class="form-group mb-0">
+                                    <div>
+                                        <span class="text-muted" style="font-size: 0.95em;">
+                                            Forgot your password?&nbsp;
+                                        </span>
                                         @if (Route::has('password.request'))
-                                            <a href="{{ route('password.request') }}" class="text-primary">Forgot Password?</a>
+                                            <a href="{{ route('password.request') }}" class="text-primary">Reset credentials</a>
                                         @endif
                                     </div>
                                 </div>
 
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    <span class="status-indicator"></span> Authenticate
+                                </button>
                             </form>
-
-                            <div class="new-account mt-4 text-center">
-                                <p class="mb-0">Don't have an account?
-                                    <a class="text-primary font-weight-bold" href="./page-register.html">Sign Up</a>
-                                </p>
-                            </div>
                         </div>
                     </div>
                 </div>
