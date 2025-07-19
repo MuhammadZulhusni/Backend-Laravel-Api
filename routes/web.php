@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route; 
 use App\Http\Controllers\AdminUserController; 
+use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\HomePageEtcController;
 use App\Http\Controllers\Admin\InformationController;
 
 Route::get('/', function () {
@@ -85,4 +87,36 @@ Route::prefix('project')->group(function(){
     Route::post('/update/',[ProjectController::class, 'UpdateProject'])->name('project.update');
     // Delete a project from the database
     Route::get('/delete/{id}',[ProjectController::class, 'DeleteProject'])->name('delete.project'); 
+});
+
+// Groups all routes related to 'course' under the '/course' URL prefix.
+Route::prefix('course')->group(function(){
+    // Route to display all courses.
+    Route::get('/all',[CoursesController::class, 'AllCourses'])->name('all.courses');
+    // Route to show the form for adding a new course.
+    Route::get('/add',[CoursesController::class, 'AddCourses'])->name('add.courses');
+    // Route to store a new course in the database.
+    Route::post('/store',[CoursesController::class, 'StoreCourses'])->name('courses.store');
+    // Route to show the form for editing an existing course by its ID.
+    Route::get('/edit/{id}',[CoursesController::class, 'EditCourses'])->name('edit.courses');
+    // Route to update an existing course in the database.
+    Route::post('/update/',[CoursesController::class, 'UpdateCourses'])->name('courses.update');
+    // Route to delete a course by its ID.
+    Route::get('/delete/{id}',[CoursesController::class, 'DeleteCourses'])->name('delete.courses');
+});
+
+// Groups all routes related to 'home' under the '/home' URL prefix.
+Route::prefix('home')->group(function(){
+    // Route to display all home page content.
+    Route::get('/all',[HomePageEtcController::class, 'AllHomeContent'])->name('all.home.content');
+    // Route to show the form for adding new home page content.
+    Route::get('/add',[HomePageEtcController::class, 'AddHomeContent'])->name('add.home.content');
+    // Route to store new home page content in the database.
+    Route::post('/store',[HomePageEtcController::class, 'StoreHomeContent'])->name('homecontent.store');
+    // Route to show the form for editing existing home page content by ID.
+    Route::get('/edit/{id}',[HomePageEtcController::class, 'EditHomeContent'])->name('edit.homecontent');
+    // Route to update existing home page content in the database.
+    Route::post('/update/',[HomePageEtcController::class, 'UpdateHomeContent'])->name('homecontent.update');
+    // Route to delete home page content by ID.
+    Route::get('/delete/{id}',[HomePageEtcController::class, 'DeleteHomeContent'])->name('delete.homecontent');
 });

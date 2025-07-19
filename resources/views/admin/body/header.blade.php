@@ -1,6 +1,6 @@
 <div class="nav-header">
-    <a href="index.html" class="brand-logo">
-        <img src="{{ asset('backend/images/logo_white.png')}}" alt="Dashboard Logo">
+    <a href="#" class="brand-logo">
+        <img src="{{ asset('backend/images/logo_white.png')}}" alt="Dashboard Logo" class="img-fluid">
     </a>
 
     <div class="nav-control">
@@ -17,12 +17,6 @@
         <nav class="navbar navbar-expand">
             <div class="collapse navbar-collapse justify-content-between">
                 <div class="header-left">
-                    <div class="input-group search-area right d-lg-inline-flex d-none">
-                        <input type="text" class="form-control" placeholder="Find something here...">
-                        <div class="input-group-append">
-                            <span class="input-group-text"><a href="javascript:void(0)"><i class="flaticon-381-search-2"></i></a></span>
-                        </div>
-                    </div>
                 </div>
                 <ul class="navbar-nav header-right main-notification">
                     <li class="nav-item dropdown header-profile">
@@ -41,7 +35,7 @@
                         {{-- User Profile Dropdown --}}
                         <a class="nav-link" href="#" role="button" data-toggle="dropdown">
                             {{-- Display user's profile image or a default placeholder --}}
-                            <img src="{{ (!empty($user->profile_photo_path)) ? url('upload/user_images/'.$user->profile_photo_path) : url('upload/no_image.jpg') }}" width="20" alt="User Profile">
+                            <img src="{{ (!empty($user->profile_photo_path)) ? url('upload/user_images/'.$user->profile_photo_path) : url('upload/no_image.jpg') }}" width="20" alt="User Profile" class="img-fluid">
                             <div class="header-info">
                                 <span>{{ $user->name }}</span> {{-- Display user's name --}}
                                 <small>Super Admin</small>
