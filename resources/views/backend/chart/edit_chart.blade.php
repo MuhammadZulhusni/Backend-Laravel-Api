@@ -24,7 +24,7 @@
                                 {{-- Form Group: Technology --}}
                                 <div class="form-group">
                                     <label class="info-title">Technology </label>
-                                    <input type="text" name="Techonology" class="form-control input-default " value="{{ $chart->Techonology }}"> {{-- Input field for technology name, pre-filled with existing data. --}}
+                                    <input type="text" name="Techonology" class="form-control input-default " value="{{ $chart->x_data }}"> {{-- Input field for technology name, pre-filled with existing data. --}}
                                     @error('Techonology') {{-- Displays validation error message if the 'Techonology' field fails validation. --}}
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -33,7 +33,7 @@
                                 {{-- Form Group: Projects --}}
                                 <div class="form-group">
                                     <label class="info-title">Projects </label>
-                                    <input type="text" name="Projects" class="form-control input-default " value="{{ $chart->Projects }}"> {{-- Input field for number of projects, pre-filled. --}}
+                                    <input type="text" name="Projects" class="form-control input-default " value="{{ $chart->y_data }}"> {{-- Input field for number of projects, pre-filled. --}}
                                     @error('Projects')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror

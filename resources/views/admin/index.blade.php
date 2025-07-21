@@ -1,140 +1,356 @@
 @extends('admin.admin_master')
 
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+@endsection
+
 @section('admin')
 <div class="content-body">
-	<div class="container-fluid">
-		<div class="form-head mb-sm-5 mb-3 d-flex flex-wrap align-items-center">
-			<h2 class="font-w600 mb-2 mr-auto ">Dashboard</h2>
-		</div>
-		<div class="row">
-			<div class="col-xl-3 col-sm-6 m-t35">
-				<div class="card card-coin">
-					<div class="card-body text-center">
-						<svg class="mb-3 currency-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<circle cx="40" cy="40" r="40" fill="white"/>
-							<path d="M40.725 0.00669178C18.6241 -0.393325 0.406678 17.1907 0.00666126 39.275C-0.393355 61.3592 17.1907 79.5933 39.2749 79.9933C61.3592 80.3933 79.5933 62.8093 79.9933 40.7084C80.3933 18.6241 62.8092 0.390041 40.725 0.00669178ZM39.4083 72.493C21.4909 72.1597 7.17362 57.3257 7.50697 39.4083C7.82365 21.4909 22.6576 7.17365 40.575 7.49033C58.5091 7.82368 72.8096 22.6576 72.493 40.575C72.1763 58.4924 57.3257 72.8097 39.4083 72.493Z" fill="#00ADA3"/>
-							<path d="M40.5283 10.8305C24.4443 10.5471 11.1271 23.3976 10.8438 39.4816C10.5438 55.549 23.3943 68.8662 39.4783 69.1662C55.5623 69.4495 68.8795 56.599 69.1628 40.5317C69.4462 24.4477 56.6123 11.1305 40.5283 10.8305ZM40.0033 19.1441L49.272 35.6798L40.8133 30.973C40.3083 30.693 39.6966 30.693 39.1916 30.973L30.7329 35.6798L40.0033 19.1441ZM40.0033 60.8509L30.7329 44.3152L39.1916 49.022C39.4433 49.162 39.7233 49.232 40.0016 49.232C40.28 49.232 40.56 49.162 40.8117 49.022L49.2703 44.3152L40.0033 60.8509ZM40.0033 45.6569L29.8296 39.9967L40.0033 34.3364L50.1754 39.9967L40.0033 45.6569Z" fill="#00ADA3"/>
-						</svg>
-						<h2 class="text-black mb-2 font-w600">$168,331.09</h2>
-						<p class="mb-0 fs-14">
-							<svg  width="29" height="22" viewBox="0 0 29 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<g filter="url(#filter0_d1)">
-								<path d="M5 16C5.91797 14.9157 8.89728 11.7277 10.5 10L16.5 13L23.5 4" stroke="#2BC155" stroke-width="2" stroke-linecap="round"/>
-								</g>
-								<defs>
-								<filter id="filter0_d1" x="-3.05176e-05" y="-6.10352e-05" width="28.5001" height="22.0001" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-								<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-								<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
-								<feOffset dy="1"/>
-								<feGaussianBlur stdDeviation="2"/>
-								<feColorMatrix type="matrix" values="0 0 0 0 0.172549 0 0 0 0 0.72549 0 0 0 0 0.337255 0 0 0 0.61 0"/>
-								<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-								<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-								</filter>
-								</defs>
-							</svg>
-							<span class="text-success mr-1">45%</span>This week
-						</p>	
-					</div>
-				</div>
+    <div class="container-fluid">
+        <!-- Header Section - Retains previous elegant styling -->
+        <div class="form-head mb-4 d-flex flex-wrap align-items-center justify-content-between">
+            <h2 class="font-w600 mb-0">Dashboard Overview</h2>
+			<div class="dashboard-date">
+				<span class="text-gray-500 text-sm">{{ now()->format('F j, Y') }}</span>
 			</div>
-			<div class="col-xl-3 col-sm-6 m-t35">
-				<div class="card card-coin">
-					<div class="card-body text-center">
-						<svg class="mb-3 currency-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<circle cx="40" cy="40" r="40" fill="white"/>
-							<path d="M40 0C17.9083 0 0 17.9083 0 40C0 62.0917 17.9083 80 40 80C62.0917 80 80 62.0917 80 40C80 17.9083 62.0917 0 40 0ZM40 72.5C22.0783 72.5 7.5 57.92 7.5 40C7.5 22.08 22.0783 7.5 40 7.5C57.9217 7.5 72.5 22.0783 72.5 40C72.5 57.9217 57.92 72.5 40 72.5Z" fill="#FFAB2D"/>
-							<path d="M42.065 41.2983H36.8133V49.1H42.065C43.125 49.1 44.1083 48.67 44.7983 47.9483C45.52 47.2566 45.95 46.275 45.95 45.1833C45.9517 43.0483 44.2 41.2983 42.065 41.2983Z" fill="#FFAB2D"/>
-							<path d="M40 10.8333C23.9167 10.8333 10.8333 23.9166 10.8333 40C10.8333 56.0833 23.9167 69.1666 40 69.1666C56.0833 69.1666 69.1667 56.0816 69.1667 40C69.1667 23.9183 56.0817 10.8333 40 10.8333ZM45.935 53.5066H42.495V58.9133H38.8867V53.5066H36.905V58.9133H33.28V53.5066H26.9067V50.1133H30.4233V29.7799H26.9067V26.3866H33.28V21.0883H36.905V26.3866H38.8867V21.0883H42.495V26.3866H45.6283C47.3783 26.3866 48.9917 27.1083 50.1433 28.26C51.295 29.4116 52.0167 31.025 52.0167 32.775C52.0167 36.2 49.3133 38.995 45.935 39.1483C49.8967 39.1483 53.0917 42.3733 53.0917 46.335C53.0917 50.2816 49.8983 53.5066 45.935 53.5066Z" fill="#FFAB2D"/>
-							<path d="M44.385 36.5066C45.015 35.8766 45.3983 35.0316 45.3983 34.08C45.3983 32.1916 43.8633 30.655 41.9733 30.655H36.8133V37.52H41.9733C42.91 37.52 43.77 37.12 44.385 36.5066Z" fill="#FFAB2D"/>
-						</svg>
-						<h2 class="text-black mb-2 font-w600">$24,098</h2>
-						<p class="mb-0 fs-13">
-							<svg width="29" height="22" viewBox="0 0 29 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<g filter="url(#filter0_d2)">
-								<path d="M5 16C5.91797 14.9157 8.89728 11.7277 10.5 10L16.5 13L23.5 4" stroke="#2BC155" stroke-width="2" stroke-linecap="round"/>
-								</g>
-								<defs>
-								<filter id="filter0_d2" x="-3.05176e-05" y="-6.10352e-05" width="28.5001" height="22.0001" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-								<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-								<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
-								<feOffset dy="1"/>
-								<feGaussianBlur stdDeviation="2"/>
-								<feColorMatrix type="matrix" values="0 0 0 0 0.172549 0 0 0 0 0.72549 0 0 0 0 0.337255 0 0 0 0.61 0"/>
-								<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-								<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-								</filter>
-								</defs>
-							</svg>
-							<span class="text-success mr-1">45%</span>This week
-						</p>	
-					</div>
-				</div>
-			</div>
-			<div class="col-xl-3 col-sm-6 m-t35">
-				<div class="card card-coin">
-					<div class="card-body text-center">
-						<svg class="mb-3 currency-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<circle cx="40" cy="40" r="40" fill="white"/>
-							<path d="M40.725 0.00669178C18.6241 -0.393325 0.406678 17.1907 0.00666126 39.275C-0.393355 61.3592 17.1907 79.5933 39.2749 79.9933C61.3592 80.3933 79.5933 62.8093 79.9933 40.7084C80.3933 18.6241 62.8092 0.390041 40.725 0.00669178ZM39.4083 72.493C21.4909 72.1597 7.17362 57.3257 7.50697 39.4083C7.82365 21.4909 22.6576 7.17365 40.575 7.49033C58.5091 7.82368 72.8096 22.6576 72.493 40.575C72.1763 58.4924 57.3257 72.8097 39.4083 72.493Z" fill="#374C98"/>
-							<path d="M40.5283 10.8305C24.4443 10.5471 11.1271 23.3976 10.8438 39.4816C10.5438 55.549 23.3943 68.8662 39.4783 69.1662C55.5623 69.4495 68.8795 56.599 69.1628 40.5317C69.4462 24.4477 56.6123 11.1305 40.5283 10.8305ZM52.5455 56.9324H26.0111L29.2612 38.9483L25.4944 39.7317V36.6649L29.8279 35.7482L32.6447 20.2809H43.2284L40.8283 33.4481L44.5285 32.6647V35.7315L40.2616 36.6149L37.7949 50.2154H54.5122L52.5455 56.9324Z" fill="#374C98"/>
-						</svg>
-						<h2 class="text-black mb-2 font-w600">$667,224</h2>
-						<p class="mb-0 fs-14">
-							<svg width="29" height="22" viewBox="0 0 29 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<g filter="url(#filter0_d4)">
-								<path d="M5 4C5.91797 5.08433 8.89728 8.27228 10.5 10L16.5 7L23.5 16" stroke="#FF2E2E" stroke-width="2" stroke-linecap="round"/>
-								</g>
-								<defs>
-								<filter id="filter0_d4" x="-3.05176e-05" y="0" width="28.5001" height="22.0001" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-								<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-								<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
-								<feOffset dy="1"/>
-								<feGaussianBlur stdDeviation="2"/>
-								<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 0.180392 0 0 0 0 0.180392 0 0 0 0.61 0"/>
-								<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-								<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-								</filter>
-								</defs>
-							</svg>
-							<span class="text-danger mr-1">45%</span>This week
-						</p>	
-					</div>
-				</div>
-			</div>
-			<div class="col-xl-3 col-sm-6 m-t35">
-				<div class="card card-coin">
-					<div class="card-body text-center">
-						<svg class="mb-3 currency-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<circle cx="40" cy="40" r="40" fill="white"/>
-							<path d="M40.725 0.00669178C18.6241 -0.393325 0.406708 17.1907 0.00669178 39.275C-0.393325 61.3592 17.1907 79.5933 39.275 79.9933C61.3592 80.3933 79.5933 62.8093 79.9933 40.7084C80.3933 18.6241 62.8093 0.390041 40.725 0.00669178ZM39.4083 72.493C21.4909 72.1597 7.17365 57.3257 7.507 39.4083C7.82368 21.4909 22.6576 7.17365 40.575 7.49033C58.5091 7.82368 72.8097 22.6576 72.493 40.575C72.1763 58.4924 57.3257 72.8097 39.4083 72.493Z" fill="#FF782C"/>
-							<path d="M40.525 10.8238C24.441 10.5405 11.1238 23.391 10.8405 39.475C10.7455 44.5352 11.9605 49.3204 14.1639 53.5139H23.3326V24.8027C23.3326 23.0476 25.7177 22.4893 26.4928 24.0643L40 51.4171L53.5072 24.066C54.2822 22.4893 56.6674 23.0476 56.6674 24.8027V53.5139H65.8077C67.8578 49.6171 69.0779 45.2169 69.1595 40.525C69.4429 24.441 56.609 11.1238 40.525 10.8238Z" fill="#FF782C"/>
-							<path d="M53.3339 55.1806V31.943L41.4934 55.919C40.9334 57.0574 39.065 57.0574 38.5049 55.919L26.6661 31.943V55.1806C26.6661 56.1007 25.9211 56.8474 24.9994 56.8474H16.2474C21.4326 64.1327 29.8629 68.9795 39.475 69.1595C49.4704 69.3362 58.3908 64.436 63.786 56.8474H55.0006C54.0789 56.8474 53.3339 56.1007 53.3339 55.1806Z" fill="#FF782C"/>
-						</svg>
-						<h2 class="text-black mb-2 font-w600">$667,224</h2>
-						<p class="mb-0 fs-14">
-							<svg width="29" height="22" viewBox="0 0 29 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<g filter="url(#filter0_d5)">
-								<path d="M5 16C5.91797 14.9157 8.89728 11.7277 10.5 10L16.5 13L23.5 4" stroke="#2BC155" stroke-width="2" stroke-linecap="round"/>
-								</g>
-								<defs>
-								<filter id="filter0_d5" x="-3.05176e-05" y="-6.10352e-05" width="28.5001" height="22.0001" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-								<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-								<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
-								<feOffset dy="1"/>
-								<feGaussianBlur stdDeviation="2"/>
-								<feColorMatrix type="matrix" values="0 0 0 0 0.172549 0 0 0 0 0.72549 0 0 0 0 0.337255 0 0 0 0.61 0"/>
-								<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-								<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-								</filter>
-								</defs>
-							</svg>
-							<span class="text-success mr-1">45%</span>This week
-						</p>	
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+        </div>
+
+        <!-- Stats Cards Grid -->
+        <div class="row">
+            <!-- Total Information Card -->
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="card stat-card h-100 hover-scale" style="background: linear-gradient(135deg, #42A5F5, #2196F3);">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="stat-icon-vibrant"> {{-- New class for vibrant icon styling --}}
+                                <svg width="40" height="40" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M40 15C29.5 15 21 23.5 21 34C21 44.5 29.5 53 40 53C50.5 53 59 44.5 59 34C59 23.5 50.5 15 40 15ZM40 20C46.6274 20 52 25.3726 52 32C52 38.6274 46.6274 44 40 44C33.3726 44 28 38.6274 28 32C28 25.3726 33.3726 20 40 20Z" fill="white"/>
+                                    <path d="M40 46C38.62 46 37.49 46.99 37.05 48.33L32.18 63.63C31.54 65.57 32.74 67.5 34.72 67.5H45.28C47.26 67.5 48.46 65.57 47.82 63.63L42.95 48.33C42.51 46.99 41.38 46 40 46Z" fill="white"/>
+                                </svg>
+                            </div>
+                            <div class="text-end">
+                                <h3 class="mb-0 text-white">{{ $totalInformation }}</h3>
+                                <p class="mb-0 text-white-50 ">Total Information</p> {{-- text-white-50 for subtle grey --}}
+                            </div>
+                        </div>
+                        <div class="progress mt-3" style="height: 4px;">
+                            <div class="progress-bar" role="progressbar" style="width: {{ min($totalInformation, 100) }}%; background: rgba(255, 255, 255, 0.4) !important;" aria-valuenow="{{ $totalInformation }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Services Card -->
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="card stat-card h-100 hover-scale" style="background: linear-gradient(135deg, #EF5350, #E53935);">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="stat-icon-vibrant">
+                                <svg width="40" height="40" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M40 15C29.5 15 21 23.5 21 34C21 44.5 29.5 53 40 53C50.5 53 59 44.5 59 34C59 23.5 50.5 15 40 15ZM40 20C46.6274 20 52 25.3726 52 32C52 38.6274 46.6274 44 40 44C33.3726 44 28 38.6274 28 32C28 25.3726 33.3726 20 40 20Z" fill="white"/>
+                                    <path d="M40 46C38.62 46 37.49 46.99 37.05 48.33L32.18 63.63C31.54 65.57 32.74 67.5 34.72 67.5H45.28C47.26 67.5 48.46 65.57 47.82 63.63L42.95 48.33C42.51 46.99 41.38 46 40 46Z" fill="white"/>
+                                </svg>
+                            </div>
+                            <div class="text-end">
+                                <h3 class="mb-0 text-white">{{ $totalServices }}</h3>
+                                <p class="mb-0 text-white-50">Total Services</p>
+                            </div>
+                        </div>
+                        <div class="progress mt-3" style="height: 4px;">
+                            <div class="progress-bar" role="progressbar" style="width: {{ min($totalServices, 100) }}%; background: rgba(255, 255, 255, 0.4) !important;" aria-valuenow="{{ $totalServices }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Projects Card -->
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="card stat-card h-100 hover-scale" style="background: linear-gradient(135deg, #66BB6A, #43A047);">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="stat-icon-vibrant">
+                                <svg width="40" height="40" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M30 30L50 50M50 30L30 50" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                                    <circle cx="40" cy="40" r="30" stroke="white" stroke-width="4"/>
+                                </svg>
+                            </div>
+                            <div class="text-end">
+                                <h3 class="mb-0 text-white">{{ $totalProjects }}</h3>
+                                <p class="mb-0 text-white-50">Total Projects</p>
+                            </div>
+                        </div>
+                        <div class="progress mt-3" style="height: 4px;">
+                            <div class="progress-bar" role="progressbar" style="width: {{ min($totalProjects, 100) }}%; background: rgba(255, 255, 255, 0.4) !important;" aria-valuenow="{{ $totalProjects }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Courses Card -->
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="card stat-card h-100 hover-scale" style="background: linear-gradient(135deg, #AB47BC, #8E24AA);">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="stat-icon-vibrant">
+                                <svg width="40" height="40" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M40 20L20 40L40 60L60 40L40 20Z" fill="white"/>
+                                    <path d="M40 28L28 40L40 52L52 40L40 28Z" fill="white"/>
+                                </svg>
+                            </div>
+                            <div class="text-end">
+                                <h3 class="mb-0 text-white">{{ $totalCourses }}</h3>
+                                <p class="mb-0 text-white-50">Total Courses</p>
+                            </div>
+                        </div>
+                        <div class="progress mt-3" style="height: 4px;">
+                            <div class="progress-bar" role="progressbar" style="width: {{ min($totalCourses, 100) }}%; background: rgba(255, 255, 255, 0.4) !important;" aria-valuenow="{{ $totalCourses }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Home Content Card -->
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="card stat-card h-100 hover-scale" style="background: linear-gradient(135deg, #FFCA28, #FFC107);">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="stat-icon-vibrant">
+                                <svg width="40" height="40" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M40 10L10 40H20V70H35V50H45V70H60V40H70L40 10Z" fill="white"/>
+                                </svg>
+                            </div>
+                            <div class="text-end">
+                                <h3 class="mb-0 text-white">{{ $totalHomeContent }}</h3>
+                                <p class="mb-0 text-white-50">Home Content</p>
+                            </div>
+                        </div>
+                        <div class="progress mt-3" style="height: 4px;">
+                            <div class="progress-bar" role="progressbar" style="width: {{ min($totalHomeContent, 100) }}%; background: rgba(255, 255, 255, 0.4) !important;" aria-valuenow="{{ $totalHomeContent }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Client Reviews Card -->
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="card stat-card h-100 hover-scale" style="background: linear-gradient(135deg, #26A69A, #00897B);">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="stat-icon-vibrant">
+                                <svg width="40" height="40" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M40 20L32 36L15 38L28 50L24 68L40 60L56 68L52 50L65 38L48 36L40 20Z" fill="white"/>
+                                </svg>
+                            </div>
+                            <div class="text-end">
+                                <h3 class="mb-0 text-white">{{ $totalClientReviews }}</h3>
+                                <p class="mb-0 text-white-50">Client Reviews</p>
+                            </div>
+                        </div>
+                        <div class="progress mt-3" style="height: 4px;">
+                            <div class="progress-bar" role="progressbar" style="width: {{ min($totalClientReviews, 100) }}%; background: rgba(255, 255, 255, 0.4) !important;" aria-valuenow="{{ $totalClientReviews }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- The rest of your charts section would follow here, with updated Chart.js colors --}}
+        <!-- Charts Section -->
+        <div class="row">
+            <!-- Bar Chart -->
+            <div class="col-lg-8 mb-4">
+                <div class="card h-100">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h4 class="card-title mb-0">Technology Value Overview</h4>
+                        <div class="dropdown">
+                            <ul class="dropdown-menu" aria-labelledby="chartDropdown">
+                                <li><a class="dropdown-item" href="#">This Week</a></li>
+                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                                <li><a class="dropdown-item" href="#">All Time</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container" style="position: relative; height: 300px;">
+                            <canvas id="myBarChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pie Chart -->
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4 class="card-title mb-0">Content Distribution</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container" style="position: relative; height: 300px;">
+                            <canvas id="contentPieChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Bar Chart Data
+        const technologyLabels = @json($chartLabels);
+        const technologyValues = @json($chartValues);
+        
+        // Pie Chart Data - Updated for dark theme
+        const contentData = {
+            labels: ['Information', 'Services', 'Projects', 'Courses', 'Home Content', 'Reviews'],
+            datasets: [{
+                data: [
+                    {{ $totalInformation }}, 
+                    {{ $totalServices }}, 
+                    {{ $totalProjects }}, 
+                    {{ $totalCourses }}, 
+                    {{ $totalHomeContent }}, 
+                    {{ $totalClientReviews }}
+                ],
+                backgroundColor: [
+                    'rgba(66, 165, 245, 0.8)',
+                    'rgba(239, 83, 80, 0.8)',
+                    'rgba(102, 187, 106, 0.8)',
+                    'rgba(171, 71, 188, 0.8)',
+                    'rgba(255, 202, 40, 0.8)',
+                    'rgba(38, 166, 154, 0.8)'
+                ],
+                borderColor: [
+                    'rgba(66, 165, 245, 1)',
+                    'rgba(239, 83, 80, 1)',
+                    'rgba(102, 187, 106, 1)',
+                    'rgba(171, 71, 188, 1)',
+                    'rgba(255, 202, 40, 1)',
+                    'rgba(38, 166, 154, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        // Dark theme chart options
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#e6e6e6' // Light text for dark background
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(30, 30, 50, 0.9)',
+                    titleColor: '#ffffff',
+                    bodyColor: '#e6e6e6',
+                    borderColor: '#2a3a5e',
+                    borderWidth: 1,
+                    padding: 12,
+                    cornerRadius: 8
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        color: 'rgba(42, 58, 94, 0.5)'
+                    },
+                    ticks: {
+                        color: '#b8b8b8'
+                    }
+                },
+                y: {
+                    grid: {
+                        color: 'rgba(42, 58, 94, 0.5)'
+                    },
+                    ticks: {
+                        color: '#b8b8b8'
+                    }
+                }
+            }
+        };
+
+        // Bar Chart with dark theme
+        const barCtx = document.getElementById('myBarChart').getContext('2d');
+        const myBarChart = new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: technologyLabels,
+                datasets: [{
+                    label: 'Technology Value',
+                    data: technologyValues,
+                    backgroundColor: 'rgba(66, 165, 245, 0.7)',
+                    borderColor: 'rgba(66, 165, 245, 1)',
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                ...chartOptions,
+                plugins: {
+                    ...chartOptions.plugins,
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Pie Chart with dark theme
+        const pieCtx = document.getElementById('contentPieChart').getContext('2d');
+        const contentPieChart = new Chart(pieCtx, {
+            type: 'doughnut',
+            data: contentData,
+            options: {
+                ...chartOptions,
+                cutout: '70%',
+                plugins: {
+                    ...chartOptions.plugins,
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            color: '#e6e6e6',
+                            padding: 20,
+                            boxWidth: 12,
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    tooltip: {
+                        ...chartOptions.plugins.tooltip,
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.raw || 0;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = Math.round((value / total) * 100);
+                                return `${label}: ${value} (${percentage}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Enhanced hover effect for dark cards
+        const statCards = document.querySelectorAll('.stat-card');
+        statCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+                this.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.4)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
+            });
+        });
+    });
+</script>
+
 @endsection
+
