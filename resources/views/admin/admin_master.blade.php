@@ -18,6 +18,8 @@
     {{-- Theme CSS --}}
     <link href="{{ asset('backend/css/style.css') }}" rel="stylesheet">
 
+    @yield('styles')
+
     {{-- Toastr CSS for notifications --}}
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 

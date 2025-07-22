@@ -2,10 +2,13 @@
 
 use Illuminate\Support\Facades\Route; 
 use App\Http\Controllers\AdminUserController; 
+use App\Http\Controllers\Admin\ChartController;
 use App\Http\Controllers\Admin\FooterController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CoursesController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HomePageEtcController;
 use App\Http\Controllers\Admin\InformationController;
 use App\Http\Controllers\Admin\ClientReviewController;
@@ -21,9 +24,7 @@ Route::middleware([
     'verified', // Ensure user is verified
 ])->group(function () {
     // Dashboard route for authenticated users
-    Route::get('/dashboard', function () {
-        return view('admin.index');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 // Admin logout route
@@ -148,3 +149,14 @@ Route::prefix('footer')->group(function(){
     // Route to update an existing footer.
     Route::post('/update/',[FooterController::class, 'UpdateFooterContent'])->name('footer.update');
 });
+
+// Groups all routes related to 'chart' under the '/chart' URL prefix.
+Route::prefix('chart')->group(function(){
+    Route::get('/all',[ChartController::class, 'AllChartContent'])->name('all.chart.content');
+    Route::get('/edit/{id}',[ChartController::class, 'EditChartContent'])->name('edit.chart');
+    Route::post('/update/',[ChartController::class, 'UpdateChartContent'])->name('chart.update');
+});
+
+// Contact Message Routes
+Route::get('/all',[ContactController::class, 'AllContactMessage'])->name('contact.message');
+Route::get('/delete/message/{id}',[ContactController::class, 'DeleteContactMessage'])->name('delete.message'); 
