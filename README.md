@@ -23,6 +23,13 @@ GitHub: [https://github.com/MuhammadZulhusni/Backend-Laravel-Api](https://github
 
 ---
 
+## Default Login Details
+### Admin Login
+- **Email:** admin@gmail.com
+- **Password:** password
+
+---
+
 ## Features Overview
 
 ### Backend (Laravel REST API)
