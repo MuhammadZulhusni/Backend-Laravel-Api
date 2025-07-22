@@ -1,21 +1,24 @@
+/* Dashboard Global Styles */
 .content-body {
     background: linear-gradient(135deg, var(--background-light) 0%, var(--background-dark) 100%);
     min-height: 100vh;
-    padding: 30px 0;
+    padding: 30px 0; /* Increased padding for more breathing room */
 }
 
+/* Header Styling */
 .form-head {
     background: var(--primary-gradient);
-    padding: 30px;
-    border-radius: 20px;
+    padding: 30px; /* Increased padding */
+    border-radius: 20px; /* More rounded corners */
     color: white;
-    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
-    margin-bottom: 40px !important;
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4); /* Stronger, softer shadow */
+    margin-bottom: 40px !important; /* More space below header */
     position: relative;
     overflow: hidden;
-    display: flex;
+    display: flex; /* Ensure flex for alignment */
     justify-content: space-between;
     align-items: center;
+    animation: headerEntrance 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 .form-head::before {
@@ -25,22 +28,33 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
-    animation: shimmer 8s ease-in-out infinite;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%); /* Slightly more visible shimmer */
+    animation: shimmer 8s ease-in-out infinite; /* Slower, more subtle shimmer */
 }
 
 @keyframes shimmer {
     0%, 100% { transform: rotate(0deg) scale(0.9); opacity: 0; }
-    50% { transform: rotate(180deg) scale(1.1); opacity: 0.4; }
+    50% { transform: rotate(180deg) scale(1.1); opacity: 0.4; } /* Adjusted opacity for subtlety */
 }
 
 .form-head h2 {
     font-weight: 700;
     margin: 0;
-    font-size: 2.2rem;
-    text-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    font-size: 2.2rem; /* Slightly larger heading */
+    text-shadow: 0 3px 6px rgba(0,0,0,0.15); /* Stronger text shadow */
     position: relative;
     z-index: 2;
+}
+
+.dashboard-date span {
+    color: var(--dark-text-muted);
+    background: rgba(0,0,0,0.2);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    display: inline-block;
+    animation: fadeInUp 0.6s ease-out both;
+    animation-delay: 0.3s;
 }
 
 .stat-card {
@@ -51,7 +65,15 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     position: relative;
     z-index: 1;
+    animation: cardEntrance 0.6s ease-out both;
 }
+
+.stat-card:nth-child(1) { animation-delay: 0.1s; }
+.stat-card:nth-child(2) { animation-delay: 0.2s; }
+.stat-card:nth-child(3) { animation-delay: 0.3s; }
+.stat-card:nth-child(4) { animation-delay: 0.4s; }
+.stat-card:nth-child(5) { animation-delay: 0.5s; }
+.stat-card:nth-child(6) { animation-delay: 0.6s; }
 
 .stat-card::before {
     content: '';
@@ -83,6 +105,7 @@
     border-radius: 12px;
     background: rgba(255,255,255,0.1);
     backdrop-filter: blur(5px);
+    animation: pulse 2s infinite;
 }
 
 .stat-card h3 {
@@ -90,6 +113,11 @@
     font-weight: 700;
     margin-bottom: 5px;
     color: white;
+}
+
+.stat-card h3.count-up {
+    display: inline-block;
+    animation: countUp 0.8s ease-out both;
 }
 
 .stat-card p {
@@ -110,32 +138,10 @@
 .progress-bar {
     background: rgba(255,255,255,0.5);
     border-radius: 3px;
+    animation: progressAnimate 1.5s ease-out forwards;
 }
 
-.stat-card[style*="42A5F5"] {
-    background: linear-gradient(135deg, var(--primary-blue), #1e88e5);
-}
-
-.stat-card[style*="EF5350"] {
-    background: linear-gradient(135deg, var(--primary-red), #d32f2f);
-}
-
-.stat-card[style*="66BB6A"] {
-    background: linear-gradient(135deg, var(--primary-green), #388e3c);
-}
-
-.stat-card[style*="AB47BC"] {
-    background: linear-gradient(135deg, var(--primary-purple), #7b1fa2);
-}
-
-.stat-card[style*="FFCA28"] {
-    background: linear-gradient(135deg, var(--primary-yellow), #ffa000);
-}
-
-.stat-card[style*="26A69A"] {
-    background: linear-gradient(135deg, var(--primary-teal), #00796b);
-}
-
+/* Chart Cards - Dark Theme */
 .card {
     background: var(--dark-card);
     border: 1px solid var(--dark-border);
@@ -171,40 +177,46 @@
     background: rgba(0,0,0,0.2);
     border-radius: 8px;
     padding: 15px;
+    position: relative;
+    overflow: hidden;
 }
 
-.dropdown-toggle {
-    background: rgba(0,0,0,0.3);
-    border: 1px solid var(--dark-border);
-    color: var(--dark-text);
-    border-radius: 6px;
-    padding: 6px 12px;
-    transition: all 0.3s ease;
+.chart-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+                rgba(30,30,50,0) 0%,
+                rgba(30,30,50,0.3) 50%,
+                rgba(30,30,50,0) 100%);
+    animation: chartLoading 1.5s infinite;
+    z-index: 10;
+    opacity: 0;
 }
 
-.dropdown-toggle:hover {
-    background: rgba(0,0,0,0.4);
-    border-color: var(--primary-blue);
-    color: white;
+@keyframes chartLoading {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
 }
 
-.dropdown-menu {
-    background: var(--dark-card);
-    border: 1px solid var(--dark-border);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+/* Remove loading animation when charts are ready */
+.chart-loaded .chart-container::after {
+    display: none;
 }
 
-.dropdown-item {
-    color: var(--dark-text);
-    padding: 8px 16px;
-    transition: all 0.2s ease;
-}
-
-.dropdown-item:hover {
-    background: var(--dark-hover);
-    color: white;
-}
-
+/* Chart Tooltips - Dark Theme */
 .chartjs-tooltip {
     background: rgba(30, 30, 50, 0.9) !important;
     border: 1px solid var(--dark-border) !important;
@@ -214,10 +226,12 @@
     backdrop-filter: blur(5px);
 }
 
+/* Legend Items - Dark Theme */
 .chartjs-legend ul {
-    color: white !important;
+    color: var(--dark-text) !important;
 }
 
+/* Responsive Adjustments */
 @media (max-width: 768px) {
     .stat-card .card-body {
         padding: 20px;
@@ -245,5 +259,62 @@
 
     .stat-card .card-body {
         padding: 15px;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes progressAnimate {
+    from { width: 0%; }
+}
+
+@keyframes headerEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+        box-shadow: 0 20px 60px rgba(102, 126, 234, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+    }
+}
+
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
 }
