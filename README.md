@@ -70,10 +70,10 @@ GitHub: [https://github.com/MuhammadZulhusni/Backend-Laravel-Api](https://github
 
 ```bash
 # Clone Backend (Laravel)
-git clone https://github.com/your-username/laravel-api.git
+git clone https://github.com/MuhammadZulhusni/Backend-Laravel-Api.git
 
 # Clone Frontend (React)
-git clone https://github.com/your-username/react-frontend.git
+git clone https://github.com/MuhammadZulhusni/Frontend-React-App.git
 ```
 
 ---
