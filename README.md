@@ -4,6 +4,22 @@ Fullstack web application built using **React.js** for the frontend and **Larave
 
 ---
 
+# API Request Flow
+- **User Action (Frontend):**
+  - The user interacts with the React app such as logging in, viewing data, or submitting a form.
+- **API Request (Axios):**
+  - React sends an HTTP request (GET, POST, PUT, DELETE) to the Laravel REST API using Axios.
+- **Authentication Check:**
+  - Laravel Passport verifies the access token to ensure the user is authorized before allowing access to protected routes.
+- **Controller Logic:**
+  - Laravel routes the request to a controller, where the system validates the input and processes the requested action.
+- **Database Interaction:**
+  - The controller communicates with the MySQL database using Laravel Eloquent ORM to retrieve or store data.
+- **JSON Response: Laravel**
+  - Laravel returns a JSON response, which React uses to update the user interface dynamically.
+
+---
+
 ## Live Demo
 
 Frontend: [https://frapi.get-virtual-admin.com](https://frapi.get-virtual-admin.com)
